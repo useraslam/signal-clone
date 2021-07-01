@@ -12,8 +12,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Landing, Register} from './components/auth';
-import {COLORS} from './constants';
-import {transform} from '@babel/core';
+import {Home} from './screens';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +41,13 @@ const App = () => {
         <Stack.Screen
           name="Register"
           component={Register}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
           options={{
             headerShown: false,
           }}

@@ -13,8 +13,7 @@ import {COLORS, FONTS, SIZES, PhoneData} from '../../constants';
 import Button from '../Button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Search from 'react-native-vector-icons/AntDesign';
-import {NavigationContainer} from '@react-navigation/native';
-
+import auth from '@react-native-firebase/auth';
 const countries = PhoneData.countries.map((item, index) => {
   return {
     key: index,
@@ -26,7 +25,8 @@ const countries = PhoneData.countries.map((item, index) => {
 const Register = ({navigation}) => {
   const [showList, setShowList] = useState(false);
   const [showConform, setShowConform] = useState(false);
-  const [text, setText] = React.useState('Search');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [showVerificationScreen, setShowVerficationScreen] = useState(false);
 
   function renderCountryList() {
     return (
@@ -49,8 +49,9 @@ const Register = ({navigation}) => {
               ...FONTS.body3,
             }}
             placeholder="Search"
+            value={phoneNumber}
             placeholderTextColor={COLORS.gray}
-            onChangeText={text => setText(text)}
+            onChangeText={text => setPhoneNumber(text)}
           />
         </View>
         <FlatList
@@ -164,7 +165,7 @@ const Register = ({navigation}) => {
                 Edit Number
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('VerifyCode')}>
+            <TouchableOpacity onPress={() => setShowVerficationScreen(true)}>
               <Text
                 style={{
                   ...FONTS.Medium,
@@ -180,7 +181,139 @@ const Register = ({navigation}) => {
       </View>
     );
   }
-
+  function renderVerification() {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          flex: 1,
+          width: '100%',
+          height: '100%',
+          zIndex: 1000,
+          backgroundColor: 'white',
+          paddingTop: 100,
+          paddingHorizontal: SIZES.padding,
+        }}>
+        <Text
+          style={{
+            ...FONTS.Medium,
+            fontSize: 24,
+            lineHeight: 32,
+          }}>
+          A conformation code has been send to phone number:
+        </Text>
+        <Text
+          style={{
+            ...FONTS.Medium,
+            fontSize: 24,
+          }}>
+          {' '}
+          +1 9898 594398
+        </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingTop: SIZES.padding,
+            justifyContent: 'space-between',
+            width: '70%',
+            paddingBottom: SIZES.radius,
+          }}>
+          <TextInput
+            keyboardType="number-pad"
+            placeholderTextColor="black"
+            borderColor={COLORS.lightGray1}
+            borderWidth={1}
+            borderRadius={5}
+            width={50}
+            style={{
+              ...FONTS.body3,
+              marginRight: SIZES.radius,
+              paddingLeft: SIZES.radius,
+            }}
+          />
+          <TextInput
+            keyboardType="number-pad"
+            placeholderTextColor="black"
+            borderColor={COLORS.lightGray1}
+            borderWidth={1}
+            borderRadius={5}
+            width={50}
+            style={{
+              ...FONTS.body3,
+              marginRight: SIZES.radius,
+              paddingLeft: SIZES.radius,
+            }}
+          />
+          <TextInput
+            keyboardType="number-pad"
+            placeholderTextColor="black"
+            borderColor={COLORS.lightGray1}
+            borderWidth={1}
+            borderRadius={5}
+            width={50}
+            style={{
+              ...FONTS.body3,
+              marginRight: SIZES.radius,
+              paddingLeft: SIZES.radius,
+            }}
+          />
+          <TextInput
+            keyboardType="number-pad"
+            placeholderTextColor="black"
+            borderColor={COLORS.lightGray1}
+            borderWidth={1}
+            borderRadius={5}
+            width={50}
+            style={{
+              ...FONTS.body3,
+              marginRight: SIZES.radius,
+              paddingLeft: SIZES.radius,
+            }}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <TouchableOpacity onPress={() => setShowConform(false)}>
+            <Text
+              style={{
+                ...FONTS.Medium,
+                textTransform: 'uppercase',
+                fontSize: 14,
+                color: COLORS.primary,
+                paddingRight: SIZES.padding,
+              }}>
+              call instead
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setShowConform(false)}>
+            <Text
+              style={{
+                ...FONTS.Medium,
+                textTransform: 'uppercase',
+                fontSize: 14,
+                color: COLORS.primary,
+              }}>
+              Resend Code
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Button
+          isPrimary
+          label="Login"
+          labelStyles={{
+            textAlign: 'left',
+            ...FONTS.Medium,
+            fontSize: 14,
+            textTransform: 'uppercase',
+          }}
+          onPress={() => navigation.navigate('Home')}
+        />
+      </View>
+    );
+  }
   return (
     <SafeAreaView
       style={{
@@ -192,6 +325,7 @@ const Register = ({navigation}) => {
       <StatusBar barStyle="dark-content" translucent={true} />
       {showList ? renderCountryList() : null}
       {showConform ? renderPhoneNumberConfrom() : null}
+      {showVerificationScreen ? renderVerification() : null}
       <View
         style={{
           width: '100%',
@@ -260,6 +394,7 @@ const Register = ({navigation}) => {
           }}>
           <TextInput
             placeholder="+1"
+            keyboardType="number-pad"
             placeholderTextColor="black"
             borderColor={COLORS.lightGray1}
             borderWidth={1}
@@ -285,6 +420,7 @@ const Register = ({navigation}) => {
           </Text>
           <TextInput
             placeholder="Phone Number"
+            keyboardType="number-pad"
             placeholderTextColor={COLORS.lightGray1}
             borderColor={COLORS.lightGray1}
             borderWidth={1}
