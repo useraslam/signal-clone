@@ -49,7 +49,7 @@ const App = () => {
           name="Home"
           component={Home}
           options={{
-            headerShown: false,
+            title: 'Signal',
           }}
         />
       </Stack.Navigator>
