@@ -11,7 +11,9 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Landing} from './components/auth';
+import {Landing, Register} from './components/auth';
+import {COLORS} from './constants';
+import {transform} from '@babel/core';
 
 const Stack = createStackNavigator();
 
@@ -27,12 +29,19 @@ const App = () => {
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         translucent={true}
-        backgroundColor="transparent"
+        backgroundColor={'transparent'}
       />
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen
           name="Landing"
           component={Landing}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
           options={{
             headerShown: false,
           }}

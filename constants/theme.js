@@ -7,7 +7,8 @@ export const COLORS = {
   lightPurple: '#7B789F',
   purple: '#595683',
   grey: '#6A736F',
-  lightGray: '#B0B6BA',
+  lightGray: '#dedede',
+  lightGray1: '#c7c7c7',
 
   transparentWhite: 'rgba(255, 255, 255, 0.2)',
   transparentBlack: 'rgba(0, 0, 0, 0.6)',

@@ -1,5 +1,6 @@
 import icons from './icons';
 import images from './images';
+import PhoneData from './countrydata.json';
 import theme, {
   COLORS,
   SIZES,
@@ -19,4 +20,5 @@ export {
   darkTheme,
   lightTheme,
   selectedTheme,
+  PhoneData,
 };

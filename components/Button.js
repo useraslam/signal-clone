@@ -22,7 +22,7 @@ const Button = ({
         backgroundColor: isPrimary ? COLORS.primary : COLORS.transparent,
         borderRadius: 5,
         borderWidth: isSecondary ? 1 : null,
-        borderColor: COLORS.lightGray,
+        borderColor: COLORS.lightGray1,
         marginVertical: SIZES.base,
         ...containerStyles,
       }}

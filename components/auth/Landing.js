@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import {COLORS, FONTS, images, SIZES} from '../../constants';
 import {Button} from '../../components';
 import {NavigationContainer} from '@react-navigation/native';
@@ -51,7 +58,7 @@ const Landing = ({navigation}) => {
               flex: 1,
               justifyContent: 'space-between',
               alignItems: 'center',
-              padding: 16,
+              padding: 20,
               paddingTop: 40,
             }}>
             <Text
@@ -96,19 +103,25 @@ const Landing = ({navigation}) => {
   }
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         alignItems: 'center',
         backgroundColor: 'white',
         justifyContent: 'space-between',
       }}>
+      <StatusBar
+        barStyle={showRender ? 'light-content' : 'dark-content'}
+        translucent={true}
+        backgroundColor="transparent"
+      />
       <Image
         source={images.landingImage}
         resizeMode="cover"
         style={{
           width: '100%',
           height: 350,
+          marginTop: 40,
         }}
       />
       <Text
@@ -117,6 +130,7 @@ const Landing = ({navigation}) => {
           fontSize: 28,
           textAlign: 'center',
           paddingHorizontal: SIZES.padding,
+          marginTop: -16,
         }}>
         Take privacy with you. Be Yourself in every message.
       </Text>
@@ -125,7 +139,7 @@ const Landing = ({navigation}) => {
           width: '100%',
           alignItems: 'center',
           paddingHorizontal: SIZES.padding,
-          paddingBottom: SIZES.padding,
+          paddingBottom: SIZES.radius,
         }}>
         <TouchableOpacity>
           <Text
@@ -150,7 +164,7 @@ const Landing = ({navigation}) => {
         <Button isSecondary={true} label="Transfer or restore account" />
       </View>
       {showRender ? renderOverlayDetails() : null}
-    </View>
+    </SafeAreaView>
   );
 };
 export default Landing;
