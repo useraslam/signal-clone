@@ -12,6 +12,8 @@ target 'signalClone' do
     :hermes_enabled => false
   )
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'signalCloneTests' do
     inherit! :complete
     # Pods for testing
